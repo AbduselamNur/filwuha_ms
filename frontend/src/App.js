@@ -10,7 +10,8 @@ import NotFound from "./components/pages/NotFound";
 import Payment from "./components/pages/Payment";
 import AdminLogin from "./components/pages/AdminLogin";
 import AdminPage from "./components/pages/AdminPage";
-import Layout from './components/Layout';
+import Receipt from "./components/pages/Receipt";
+import Layout from "./components/Layout";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="book" element={<Book />} />
           <Route path="payment" element={<Payment />} />
+          <Route path="receipt" element={<Receipt />} />
         </Route>
         <Route path="/admin" element={<AdminLogin />}>
           <Route path="home" element={<AdminPage />} />

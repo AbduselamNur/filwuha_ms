@@ -1,8 +1,9 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 function Payment() {
   const location = useLocation();
+  const navigate = useNavigate();
   const formData = location.state;
   const {
     firstName: first_name,
@@ -82,6 +83,16 @@ function Payment() {
     }
   };
   console.log(paymentId, message);
+  const handeleCheck = async () => {
+    const response = await fetch(
+      `http://127.0.0.1:5000/api/v1/book/${paymentId}`
+    );
+    const data = await response?.json();
+    console.log(data);
+    if (data.payment) {
+      navigate("/receipt", { state: formData });
+    }
+  };
 
   return (
     <div className="flex">
@@ -145,7 +156,7 @@ function Payment() {
         <button
           className="w-1/3 justify-end mt-3 mb-auto py-1 rounded-lg bg-slate-300 hover:bg-slate-500 hover:text-white transition-all"
           disabled={isLoading}
-          onClick={handlePay}
+          onClick={isPaying ? handeleCheck : handlePay}
         >
           {isLoading ? "..." : isPaying ? "Check" : "Pay"}
         </button>
